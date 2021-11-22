@@ -1,4 +1,4 @@
-import { detailsProps } from '../types';
+import { detailsProps } from '../../types';
 import { useIsActive } from './UseIsActive';
 
 export default function MenuDetails({children, id}: detailsProps) {

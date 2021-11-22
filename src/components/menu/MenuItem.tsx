@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { MenuItemProps } from '../types';
+import { MenuItemProps } from '../../types';
 import { useMenuItem } from './menuProvider'
 import { useIsActive } from './UseIsActive';
 

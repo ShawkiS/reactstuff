@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MenuActionsProps, MenuContextProps, MenuContextProviderProps, MenuItemProps } from '../types';
+import { MenuActionsProps, MenuContextProps, MenuContextProviderProps, MenuItemProps } from '../../types';
 
 
 const MenuContext = React.createContext<MenuContextProps | undefined>(

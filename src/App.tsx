@@ -3,115 +3,37 @@ import MenuContextProvider from './components/menu/menuProvider';
 import MenuDetails from './components/menu/MenuDetails';
 import MenuItem from './components/menu/MenuItem';
 import BulletPointViewer from './components/bulletPointViewer/BulletPointViewer';
-import { BulletPointNode } from './components/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBullet, changeInputId } from './redux/actions';
+import { State } from './types';
+import { useRef } from 'react';
+import { useIsRootAdd } from './components/bulletPointViewer/useIsRootAdd';
 
-
-const EXAMPLE_TREE: BulletPointNode = {
-  text: "A",
-  color: "red",
-  children: [
-    {
-      text: "1",
-      children: []
-    },
-    {
-      text: "2",
-      children: [
-        {
-          text: "A",
-          children: [{
-            text: "A",
-            children: [{
-              text: "A",
-              children: []
-            },
-    
-            {
-              text: "B",
-              color: "blue",
-              children: [{
-                text: "A",
-                children: []
-              },
-      
-              {
-                text: "B",
-                color: "red",
-                children: []
-              },
-      
-              {
-                text: "C",
-                children: [ {
-                  color: 'orange',
-                  text: "C",
-                  children: [{
-                    color: 'orange',
-                    text: "C",
-                    children: []
-                  }]
-                }]
-              }]
-            },
-    
-            {
-              text: "C",
-              children: [{
-                text: "A",
-                children: []
-              },
-      
-              {
-                text: "B",
-                color: "red",
-                children: []
-              },
-      
-              {
-                text: "C",
-                color: 'green',
-                children: []
-              }]
-            }]
-          },
-  
-          {
-            text: "B",
-            color: "red",
-            children: []
-          },
-  
-          {
-            color: 'green',
-            text: "C",
-            children: []
-          }]
-        },
-
-        {
-          text: "B",
-          color: "red",
-          children: []
-        },
-
-        {
-          text: "C",
-          children: []
-        }
-      ]
-    },
-    {
-      text: "3",
-      children: []
-    }
-  ]
-};
 
 function App() {
+  const dispatch = useDispatch();
+  const bulletRootNode: State = useSelector((state: State) => state);
+
+  const text = useRef<HTMLInputElement | null>(null);
+  const color = useRef<HTMLInputElement | null>(null);
+  const rootinput = useRef<HTMLInputElement | null>(null);
+
+  const isRoot = useIsRootAdd();
+
+  const addRoot = () => {
+    dispatch(addBullet(text.current?.value!, color.current?.value!));
+  }
+
+  const rootAdd = () => {
+    if(rootinput.current?.checked) {
+    dispatch(changeInputId(0))
+    }
+  }
+
   return (
    <>
     <MenuContextProvider 
-    isActiveId= "1" 
+    isActiveId= "3" 
     isActiveStyle={{color: 'black', borderBottomColor: 'blue', borderBottomStyle: 'solid'}}
     notActiveStyle={{color: 'gray'}}
     >
@@ -130,8 +52,12 @@ function App() {
       </MenuDetails>
 
       <MenuDetails id="2"> 
-      <h1>GNNNNNNn</h1>
-        <BulletPointViewer rootNode={EXAMPLE_TREE} />
+        <input ref={text} />
+        <input ref={color} />
+        <input checked={isRoot} onChange={()=> rootAdd()} ref={rootinput} type='checkbox' /> 
+        <label> Root</label>
+        <button onClick={async () => addRoot()}>Add</button>      
+       {<BulletPointViewer rootNode={bulletRootNode.bullet} />}
       </MenuDetails>
 
       </MenuContextProvider>
