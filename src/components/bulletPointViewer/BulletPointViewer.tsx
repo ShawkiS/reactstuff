@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeInputId, removeById } from "../../redux/actions";
 import { BulletPointNode } from "../../types";
-import Button from "../button";
 
 export default function BulletPointViewer(props: { rootNode: BulletPointNode | undefined }) {
   const dispatch = useDispatch();
