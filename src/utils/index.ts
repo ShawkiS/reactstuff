@@ -37,3 +37,32 @@ export const filterItems = (commands: Command [], str: string): Command [] => {
 
  return returnCommands;
 }
+
+export const updateUrlHash = (hash: string) => {
+    window.location.hash = hash;
+  };
+  
+  export const scrollToSection = (section: any) => {
+    if (section) {
+      section.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
+  };
+  
+  export const getScrollPercentage = (elm: any) => {
+    const parent = elm.parentNode;
+    const percentage =
+      ((elm.scrollTop || parent.scrollTop) /
+        (parent.scrollHeight - parent.clientHeight)) *
+      100;
+  
+    return `${percentage.toFixed(0)}%`;
+  };
+  
+  export const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+  
