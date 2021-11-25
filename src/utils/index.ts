@@ -1,4 +1,4 @@
-import { BulletPointNode } from "../types";
+import { BulletPointNode, Command } from "../types";
 
 
 export const removeById=(arr: BulletPointNode [], id: number)=>{
@@ -21,4 +21,19 @@ export const addById=(arr: BulletPointNode [], id: number, children: BulletPoint
         }
     })
     return arr[0];
+}
+
+export const filterItems = (commands: Command [], str: string): Command [] => {
+    const returnCommands: Command [] = [];
+    commands.map((c) => {
+        const includes = c.text
+          .toLowerCase()
+          .includes(str.toLowerCase() as string);
+        
+        if (includes) {
+            returnCommands.push(c);
+        } 
+     });
+
+ return returnCommands;
 }

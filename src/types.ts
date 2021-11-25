@@ -1,3 +1,5 @@
+import { MutableRefObject } from "react";
+
 export interface MenuItemProps {
     id: string
     children?: React.ReactNode;
@@ -56,4 +58,21 @@ export interface Action {
 export interface ButtonProps {
   text: string;
   onClick: React.MouseEventHandler
+}
+
+export interface Command {
+  id: string;
+  text: string;
+  shortcut: string
+  method: (inputRef?: MutableRefObject<HTMLInputElement | null>) => void;
+}
+
+export interface SlashProps {
+  commands: Command [];
+}
+
+export enum Buttons {
+  ArrowDown = "ArrowDown",
+  ArrowUp = "ArrowUp",
+  Enter = "Enter"
 }

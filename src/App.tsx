@@ -6,8 +6,9 @@ import BulletPointViewer from './components/bulletPointViewer/BulletPointViewer'
 import { useDispatch, useSelector } from 'react-redux';
 import { addBullet, changeInputId } from './redux/actions';
 import { State } from './types';
-import { useRef } from 'react';
+import { MutableRefObject, useRef } from 'react';
 import { useIsRootAdd } from './components/bulletPointViewer/useIsRootAdd';
+import Slash from './components/slash';
 
 
 function App() {
@@ -30,6 +31,10 @@ function App() {
     }
   }
 
+  const sayHello = () => {
+    alert("hi");
+  };
+
   return (
    <>
     <MenuContextProvider 
@@ -45,6 +50,9 @@ function App() {
       <MenuItem id="2"> 
         <li>GN</li>
       </MenuItem>
+      <MenuItem id="3"> 
+        <li>Ga</li>
+      </MenuItem>
     </ul>
 
       <MenuDetails id="1"> 
@@ -58,6 +66,13 @@ function App() {
         <label> Root</label>
         <button onClick={async () => addRoot()}>Add</button>      
        {<BulletPointViewer rootNode={bulletRootNode.bullet} />}
+      </MenuDetails>
+
+      <MenuDetails id="3"> 
+       <Slash commands={[
+    {id: "1", text: "Say Hello", method: sayHello, shortcut: "" },
+    {id: "2", text: "Say", method: sayHello, shortcut: "" },
+]} />
       </MenuDetails>
 
       </MenuContextProvider>

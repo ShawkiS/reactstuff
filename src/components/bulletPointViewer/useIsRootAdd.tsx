@@ -7,7 +7,8 @@ export const useIsRootAdd = () => {
     const state: State = useSelector((state: State) => state);
     
     useEffect(() => {
-        setIsRoot(state.inputId === 0 ? true : false);
+        setIsRoot(state.inputId === 0
+            ? true : false);
     }, [state.inputId])
 
     return isRoot;
